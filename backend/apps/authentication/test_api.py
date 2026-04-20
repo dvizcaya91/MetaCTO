@@ -72,6 +72,37 @@ class AuthenticationAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(response.data["detail"], "Invalid username or password.")
 
+    def test_refresh_returns_new_access_token(self):
+        user = User.objects.create_user(
+            username="refresh-user",
+            password="Str0ngPassword123!",
+        )
+        refresh_token = str(RefreshToken.for_user(user))
+
+        response = self.client.post(
+            "/api/v1/auth/refresh/",
+            {"refresh": refresh_token},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+        self.assertNotIn("refresh", response.data)
+
+        access_token = AccessToken(response.data["access"])
+        self.assertEqual(access_token["token_type"], "access")
+        self.assertEqual(access_token["user_id"], str(user.id))
+
+    def test_refresh_rejects_invalid_refresh_token(self):
+        response = self.client.post(
+            "/api/v1/auth/refresh/",
+            {"refresh": "not-a-valid-token"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.data["detail"], "Invalid refresh token.")
+
     def test_jwt_token_lifetimes_match_configuration(self):
         self.assertEqual(
             settings.SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"],

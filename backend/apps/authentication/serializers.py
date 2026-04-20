@@ -14,6 +14,12 @@ class TokenPairSerializer(serializers.Serializer):
     refresh = serializers.CharField(read_only=True)
 
 
+class AccessTokenSerializer(serializers.Serializer):
+    """Access token response serializer."""
+
+    access = serializers.CharField(read_only=True)
+
+
 class SignupSerializer(serializers.Serializer):
     """Validate signup requests."""
 
@@ -38,3 +44,9 @@ class LoginSerializer(serializers.Serializer):
 
     username = serializers.CharField(max_length=150)
     password = serializers.CharField(write_only=True, trim_whitespace=False)
+
+
+class RefreshTokenSerializer(serializers.Serializer):
+    """Validate refresh token requests."""
+
+    refresh = serializers.CharField(write_only=True, trim_whitespace=False)

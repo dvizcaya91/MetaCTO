@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -32,3 +33,13 @@ def issue_tokens_for_user(user):
         access=str(refresh.access_token),
         refresh=str(refresh),
     )
+
+
+def issue_access_token_from_refresh(*, refresh):
+    """Generate a new access token from a valid refresh token."""
+    try:
+        refresh_token = RefreshToken(refresh)
+    except TokenError as exc:
+        raise AuthenticationFailed("Invalid refresh token.") from exc
+
+    return str(refresh_token.access_token)
