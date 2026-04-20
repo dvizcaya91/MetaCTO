@@ -20,19 +20,57 @@ Use this skill for front-end work in `src/`, `vite.config.*`, `tsconfig*.json`, 
 5. Validate with the real toolchain.
    Run the relevant type check, test suite, or Vite build command if available.
 
-## Vite and React Guidance
+## Mandatory Setup
 
-- Use `import.meta.env` for environment variables, not Node-specific globals.
-- Preserve fast refresh and module boundaries by avoiding overly dynamic module wiring.
-- Favor framework-native code splitting and route-level lazy loading when bundle growth is meaningful.
-- Use runtime validation for untrusted API responses when the repo already has a pattern or the boundary is risky.
-- Keep accessibility, keyboard flow, and semantic HTML in scope for every interactive feature.
+This project must adhere exactly to the following configuration and conventions. Any deviation is not allowed.
+1. Framework & Tooling
+   - React (v19.1) generated with Vite
+   - TypeScript throughout. Everything should be typed and you should avoid using elements of type any
+   - React Router (v7.6) for client-side routing
+   - State management with Zustand (v5.0)
 
-## TypeScript Standards
+### Styling
+2. Tailwind CSS v4
+   - No other CSS frameworks
+3. For icons, use lucid icons library
 
-- Prefer precise unions and discriminated unions over loose booleans and optional fields.
-- Avoid `any`; use `unknown` plus narrowing when data is not trusted.
-- Type async API layers separately from UI state so transport details do not leak through the component tree.
+### Architecture & Organization
+4. Atomic Design
+   - `atoms/`, `molecules/`, `organisms/`, `templates/`, `pages/` under `src/components/`
+5. Feature-Based Hooks
+   - All custom hooks live in `src/hooks/{feature}/`
+   - Keep hook logic decoupled from UI
+6. API Layer
+   - Axios (v1.10) + SWR (v2.3) for data fetching, caching & revalidation
+   - Two wrappers (`apiPrivate.ts`, `apiPublic.ts`) for shared Axios config
+   - For mockup data, use SWR with fallbackData
+7. Type Definitions
+   - `src/interfaces/{feature}/` for all TypeScript interfaces & types. All interfaces must start with capital I
+
+### Component & UX Requirements
+8. Components
+   - Use shadcn as the base library for components.
+   - Whenever there is a search component, use use-debounce library to delay the call to the API
+9. Data-Loading Components
+   - Always include a `loading` state
+   - Render a lightweight skeleton loader while fetching
+10. Forms
+   - Use a single `useForm` hook instance per form
+   - Centralize validation & error handling so all forms behave consistently
+11. Language
+   - Use react-i18next for multilanguage support. Every text in the platform must come from this
+
+
+### Naming & Conventions
+12. Language & Style
+   - All identifiers in English
+   - Follow established JS/TS naming (camelCase for variables/functions, PascalCase for components/types/files, CAPITAL_SNAKE_CASE for global variables) 
+   - For functions definitions use arrow syntax
+
+
+### Validations
+13. The platform should pass the lint validation
+14. Before finishing, run `npm run build` to make sure everything is working
 
 ## Reference
 
