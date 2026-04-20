@@ -1,0 +1,4 @@
+interface:
+  display_name: "Senior Python Programming"
+  short_description: "Apply senior-level Python engineering."
+  default_prompt: "Use $senior-python-programming to implement this Python change with strong typing, tests, and maintainable structure."

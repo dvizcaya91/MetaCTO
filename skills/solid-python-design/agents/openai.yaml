@@ -1,0 +1,4 @@
+interface:
+  display_name: "SOLID Python Design"
+  short_description: "Use SOLID principles in Python code."
+  default_prompt: "Use $solid-python-design to review this Python design for SOLID violations and suggest a cleaner structure."

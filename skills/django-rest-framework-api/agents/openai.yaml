@@ -1,0 +1,4 @@
+interface:
+  display_name: "Django REST Framework APIs"
+  short_description: "Build and review DRF REST APIs."
+  default_prompt: "Use $django-rest-framework-api to implement or review this Django REST Framework endpoint, serializer, and permissions flow."

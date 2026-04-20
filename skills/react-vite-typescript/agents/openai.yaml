@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Vite TypeScript"
+  short_description: "Build React + Vite + TypeScript apps."
+  default_prompt: "Use $react-vite-typescript to build or refactor this Vite React TypeScript feature with strong typing and clean component structure."

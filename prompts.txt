@@ -1,0 +1,1 @@
+[2026-04-20T14:27:38-05:00] Prompt: Create an AGENTS.md file with main instructions for this development project, and include the specified prompt-logging rule at the top. Response: Created AGENTS.md with project-wide engineering and collaboration rules, and initialized prompts.txt for ongoing prompt logging.
