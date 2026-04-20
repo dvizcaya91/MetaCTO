@@ -19,7 +19,7 @@ export const NotFoundPage = () => {
           {t('notFound.description')}
         </p>
         <Button asChild>
-          <Link to="/">{t('notFound.action')}</Link>
+          <Link to="/login">{t('notFound.action')}</Link>
         </Button>
       </div>
     </section>

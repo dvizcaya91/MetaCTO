@@ -1,20 +1,29 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 
-import { FeatureRequestsPage } from '@/components/pages/FeatureRequestsPage'
+import { DashboardPage } from '@/components/pages/DashboardPage'
+import { LoginPage } from '@/components/pages/LoginPage'
 import { NotFoundPage } from '@/components/pages/NotFoundPage'
-import { SubmitFeatureRequestPage } from '@/components/pages/SubmitFeatureRequestPage'
+import { SignupPage } from '@/components/pages/SignupPage'
 import { AppShellTemplate } from '@/components/templates/AppShellTemplate'
 
 export const appRouter = createBrowserRouter([
   {
     children: [
       {
-        element: <FeatureRequestsPage />,
+        element: <Navigate replace to="/login" />,
         index: true,
       },
       {
-        element: <SubmitFeatureRequestPage />,
-        path: 'submit',
+        element: <SignupPage />,
+        path: 'signup',
+      },
+      {
+        element: <LoginPage />,
+        path: 'login',
+      },
+      {
+        element: <DashboardPage />,
+        path: 'dashboard',
       },
       {
         element: <NotFoundPage />,
