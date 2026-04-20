@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Feature Voting System API
+  version: 0.1.0
+  description: >
+    Current API contract for the implemented authentication endpoints.
+    Signup and login both return JWT access and refresh tokens.
+
+servers:
+  - url: /api/v1
+    description: API v1 base path
+
+tags:
+  - name: Authentication
+    description: User signup and login endpoints
+
+paths:
+  /auth/signup/:
+    post:
+      tags:
+        - Authentication
+      operationId: authSignup
+      summary: Sign up a user
+      description: >
+        Creates a new user account and returns a JWT token pair immediately.
+        No email or account verification is required at this stage.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupRequest"
+            examples:
+              default:
+                summary: Signup payload
+                value:
+                  username: alice
+                  password: Str0ngPassword123!
+                  email: alice@example.com
+                  first_name: Alice
+                  last_name: Doe
+      responses:
+        "201":
+          description: User created and tokens issued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenPair"
+              examples:
+                default:
+                  value:
+                    access: <jwt-access-token>
+                    refresh: <jwt-refresh-token>
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+              examples:
+                duplicate_username:
+                  summary: Username already exists
+                  value:
+                    username:
+                      - A user with that username already exists.
+                weak_password:
+                  summary: Password failed validation
+                  value:
+                    password:
+                      - This password is too common.
+
+  /auth/login/:
+    post:
+      tags:
+        - Authentication
+      operationId: authLogin
+      summary: Log in a user
+      description: Authenticates a user with username and password and returns a JWT token pair.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+            examples:
+              default:
+                summary: Login payload
+                value:
+                  username: alice
+                  password: Str0ngPassword123!
+      responses:
+        "200":
+          description: User authenticated and tokens issued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenPair"
+              examples:
+                default:
+                  value:
+                    access: <jwt-access-token>
+                    refresh: <jwt-refresh-token>
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+              examples:
+                missing_fields:
+                  summary: Required fields missing
+                  value:
+                    username:
+                      - This field is required.
+                    password:
+                      - This field is required.
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+              examples:
+                invalid_credentials:
+                  value:
+                    detail: Invalid username or password.
+
+components:
+  schemas:
+    SignupRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          maxLength: 150
+        password:
+          type: string
+          format: password
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      additionalProperties: false
+
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          maxLength: 150
+        password:
+          type: string
+          format: password
+      additionalProperties: false
+
+    TokenPair:
+      type: object
+      required:
+        - access
+        - refresh
+      properties:
+        access:
+          type: string
+          description: JWT access token with a 5-minute lifetime.
+        refresh:
+          type: string
+          description: JWT refresh token with a 30-day lifetime.
+      additionalProperties: false
+
+    ErrorDetail:
+      type: object
+      required:
+        - detail
+      properties:
+        detail:
+          type: string
+      additionalProperties: false
+
+    ValidationError:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
