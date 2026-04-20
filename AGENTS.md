@@ -63,3 +63,7 @@ This repository is for a web application platform with a backend and a frontend.
 - `skills/django-rest-framework-api`
 - `skills/react-vite-typescript`
 - Prefer these skills when the work matches their domain instead of restating the same guidance in each task.
+
+
+## UI & UX Style guidelines
+For styling, refer to file STYLES.md
