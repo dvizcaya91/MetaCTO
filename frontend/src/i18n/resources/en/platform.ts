@@ -53,6 +53,21 @@ const platformEn = {
       close: 'Close modal',
       description:
         'Describe the improvement clearly so other users can understand it and decide whether to vote for it.',
+      duplicate: {
+        accept: 'Accept suggestion and vote',
+        acceptError:
+          'We could not apply the suggested vote right now. Try again in a moment.',
+        acceptSubmitting: 'Accepting suggestion...',
+        createdAt: 'Created {{value}}',
+        eyebrow: 'Similar request found',
+        force: 'These features are different',
+        forceSubmitting: 'Retrying with override...',
+        reasonLabel: 'Why this looks the same: {{reason}}',
+        suggestedBadge: 'Suggested feature',
+        summary:
+          'A similar feature request already exists. Review the suggested feature below.',
+        title: 'A matching feature request is already on the board',
+      },
       descriptionLabel: 'Description',
       descriptionPlaceholder:
         'Explain the feature request and the problem it solves',

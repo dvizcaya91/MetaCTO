@@ -55,6 +55,21 @@ const platformEs = {
       close: 'Cerrar modal',
       description:
         'Describe claramente la mejora para que otros usuarios la entiendan y decidan si quieren votarla.',
+      duplicate: {
+        accept: 'Aceptar sugerencia y votar',
+        acceptError:
+          'No fue posible aplicar el voto sugerido en este momento. Intenta nuevamente en un momento.',
+        acceptSubmitting: 'Aceptando sugerencia...',
+        createdAt: 'Creada {{value}}',
+        eyebrow: 'Solicitud similar encontrada',
+        force: 'Estas funcionalidades son diferentes',
+        forceSubmitting: 'Reintentando con override...',
+        reasonLabel: 'Por qué parecen la misma: {{reason}}',
+        suggestedBadge: 'Funcionalidad sugerida',
+        summary:
+          'Ya existe una solicitud de funcionalidad similar. Revisa la funcionalidad sugerida abajo.',
+        title: 'Ya existe una solicitud parecida en el tablero',
+      },
       descriptionLabel: 'Descripción',
       descriptionPlaceholder:
         'Explica la solicitud y el problema que esta funcionalidad resolvería',
