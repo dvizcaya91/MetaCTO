@@ -1,7 +1,8 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 
-from apps.voting.services import ensure_user_can_vote_for_feature
+from apps.voting.domain import SelfVoteNotAllowedError, ensure_user_can_vote_for_feature
 
 
 class Feature(models.Model):
@@ -50,7 +51,10 @@ class Vote(models.Model):
         super().clean()
 
         if self.feature_id and self.user_id:
-            ensure_user_can_vote_for_feature(feature=self.feature, user=self.user)
+            try:
+                ensure_user_can_vote_for_feature(feature=self.feature, user=self.user)
+            except SelfVoteNotAllowedError as exc:
+                raise ValidationError(str(exc))
 
     def __str__(self):
         return "{user} -> {feature}".format(

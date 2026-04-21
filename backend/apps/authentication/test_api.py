@@ -91,7 +91,7 @@ class AuthenticationAPITests(APITestCase):
 
         access_token = AccessToken(response.data["access"])
         self.assertEqual(access_token["token_type"], "access")
-        self.assertEqual(access_token["user_id"], str(user.id))
+        self.assertEqual(access_token["user_id"], user.id)
 
     def test_refresh_rejects_invalid_refresh_token(self):
         response = self.client.post(

@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: Feature Voting System API
-  version: 0.1.0
+  version: 0.2.0
   description: >
-    Current API contract for the implemented authentication endpoints.
-    Signup and login both return JWT access and refresh tokens.
+    Current API contract for authentication, current-user, and feature voting
+    endpoints.
 
 servers:
   - url: /api/v1
@@ -12,7 +12,11 @@ servers:
 
 tags:
   - name: Authentication
-    description: User signup and login endpoints
+    description: User signup, login, and token refresh endpoints
+  - name: Users
+    description: Authenticated user profile endpoints
+  - name: Features
+    description: Feature creation, listing, and vote management endpoints
 
 paths:
   /auth/signup/:
@@ -21,24 +25,12 @@ paths:
         - Authentication
       operationId: authSignup
       summary: Sign up a user
-      description: >
-        Creates a new user account and returns a JWT token pair immediately.
-        No email or account verification is required at this stage.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/SignupRequest"
-            examples:
-              default:
-                summary: Signup payload
-                value:
-                  username: alice
-                  password: Str0ngPassword123!
-                  email: alice@example.com
-                  first_name: Alice
-                  last_name: Doe
       responses:
         "201":
           description: User created and tokens issued
@@ -46,28 +38,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TokenPair"
-              examples:
-                default:
-                  value:
-                    access: <jwt-access-token>
-                    refresh: <jwt-refresh-token>
         "400":
           description: Validation error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ValidationError"
-              examples:
-                duplicate_username:
-                  summary: Username already exists
-                  value:
-                    username:
-                      - A user with that username already exists.
-                weak_password:
-                  summary: Password failed validation
-                  value:
-                    password:
-                      - This password is too common.
 
   /auth/login/:
     post:
@@ -75,19 +51,12 @@ paths:
         - Authentication
       operationId: authLogin
       summary: Log in a user
-      description: Authenticates a user with username and password and returns a JWT token pair.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/LoginRequest"
-            examples:
-              default:
-                summary: Login payload
-                value:
-                  username: alice
-                  password: Str0ngPassword123!
       responses:
         "200":
           description: User authenticated and tokens issued
@@ -95,37 +64,256 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TokenPair"
-              examples:
-                default:
-                  value:
-                    access: <jwt-access-token>
-                    refresh: <jwt-refresh-token>
         "400":
           description: Validation error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ValidationError"
-              examples:
-                missing_fields:
-                  summary: Required fields missing
-                  value:
-                    username:
-                      - This field is required.
-                    password:
-                      - This field is required.
         "401":
           description: Invalid credentials
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDetail"
-              examples:
-                invalid_credentials:
-                  value:
-                    detail: Invalid username or password.
+
+  /auth/refresh/:
+    post:
+      tags:
+        - Authentication
+      operationId: authRefresh
+      summary: Exchange a refresh token for a new access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshTokenRequest"
+      responses:
+        "200":
+          description: New access token issued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessToken"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Invalid refresh token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+
+  /users/me/:
+    get:
+      tags:
+        - Users
+      operationId: currentUser
+      summary: Get the current authenticated user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrentUser"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+
+  /features/:
+    get:
+      tags:
+        - Features
+      operationId: featureList
+      summary: List features
+      description: >
+        Public endpoint for listing features with optional search, sorting,
+        and authenticated-user filters.
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Case-insensitive search across title and description.
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum:
+              - created_at
+              - last_voted_at
+              - number_of_votes
+            default: number_of_votes
+          description: All sort options are returned in descending order.
+        - in: query
+          name: mine
+          schema:
+            type: boolean
+            default: false
+          description: Only include features owned by the authenticated user.
+        - in: query
+          name: voted
+          schema:
+            type: boolean
+            default: false
+          description: Only include features the authenticated user has voted on.
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: Page number for paginated results.
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: Number of features per page. Defaults to 20.
+      responses:
+        "200":
+          description: Paginated feature list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedFeatureList"
+        "401":
+          description: Authentication required for mine or voted filters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+    post:
+      tags:
+        - Features
+      operationId: featureCreate
+      summary: Create a feature
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFeatureRequest"
+      responses:
+        "201":
+          description: Feature created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feature"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+
+  /features/{feature_id}/vote/:
+    post:
+      tags:
+        - Features
+      operationId: featureVote
+      summary: Vote on a feature
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: feature_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Vote applied and feature counters updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feature"
+        "400":
+          description: Invalid vote state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+        "404":
+          description: Feature not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+
+  /features/{feature_id}/unvote/:
+    post:
+      tags:
+        - Features
+      operationId: featureUnvote
+      summary: Remove a vote from a feature
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: feature_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Vote removed and feature counters updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feature"
+        "400":
+          description: Invalid vote state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+        "404":
+          description: Feature not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
     SignupRequest:
       type: object
@@ -164,6 +352,15 @@ components:
           format: password
       additionalProperties: false
 
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refresh
+      properties:
+        refresh:
+          type: string
+      additionalProperties: false
+
     TokenPair:
       type: object
       required:
@@ -176,6 +373,105 @@ components:
         refresh:
           type: string
           description: JWT refresh token with a 30-day lifetime.
+      additionalProperties: false
+
+    AccessToken:
+      type: object
+      required:
+        - access
+      properties:
+        access:
+          type: string
+          description: JWT access token with a 5-minute lifetime.
+      additionalProperties: false
+
+    CurrentUser:
+      type: object
+      required:
+        - id
+        - username
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+      additionalProperties: false
+
+    CreateFeatureRequest:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+      additionalProperties: false
+
+    Feature:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - owner
+        - created_at
+        - updated_at
+        - number_of_votes
+        - is_owner
+        - has_voted
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        owner:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_voted_at:
+          type: string
+          format: date-time
+          nullable: true
+        number_of_votes:
+          type: integer
+          minimum: 0
+        is_owner:
+          type: boolean
+        has_voted:
+          type: boolean
+      additionalProperties: false
+
+    PaginatedFeatureList:
+      type: object
+      required:
+        - count
+        - next
+        - previous
+        - results
+      properties:
+        count:
+          type: integer
+          minimum: 0
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Feature"
       additionalProperties: false
 
     ErrorDetail:
