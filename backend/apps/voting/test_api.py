@@ -1,12 +1,19 @@
+from unittest.mock import patch
+
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from apps.voting.models import Feature, Vote
+from apps.voting.models import Feature, FeatureEmbedding, Vote
+from apps.voting.semantic import (
+    SemanticDuplicateMatch,
+    SemanticValidationUnavailableError,
+)
 
 
 User = get_user_model()
+EMBEDDING_VECTOR = [0.0] * 1536
 
 
 class FeatureAPITests(APITestCase):
@@ -31,7 +38,15 @@ class FeatureAPITests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_create_feature_returns_serialized_feature(self):
+    @patch("apps.voting.services.semantic_feature_validator.find_duplicate_match")
+    @patch("apps.voting.services.semantic_feature_validator.generate_embedding")
+    def test_create_feature_returns_serialized_feature(
+        self,
+        mock_generate_embedding,
+        mock_find_duplicate_match,
+    ):
+        mock_generate_embedding.return_value = EMBEDDING_VECTOR
+        mock_find_duplicate_match.return_value = None
         self.client.force_authenticate(user=self.owner)
 
         response = self.client.post(
@@ -46,6 +61,97 @@ class FeatureAPITests(APITestCase):
         self.assertEqual(response.data["number_of_votes"], 0)
         self.assertTrue(response.data["is_owner"])
         self.assertFalse(response.data["has_voted"])
+        self.assertTrue(
+            FeatureEmbedding.objects.filter(feature_id=response.data["id"]).exists()
+        )
+
+    @patch("apps.voting.services.semantic_feature_validator.find_duplicate_match")
+    @patch("apps.voting.services.semantic_feature_validator.generate_embedding")
+    def test_create_feature_returns_duplicate_candidate_when_semantically_matched(
+        self,
+        mock_generate_embedding,
+        mock_find_duplicate_match,
+    ):
+        existing_feature = Feature.objects.create(
+            title="Dark mode",
+            description="Please add a dark theme.",
+            owner=self.owner,
+        )
+        mock_generate_embedding.return_value = EMBEDDING_VECTOR
+        mock_find_duplicate_match.return_value = SemanticDuplicateMatch(
+            confidence=0.94,
+            feature_id=existing_feature.id,
+            reason="Both requests ask for the same dark theme capability.",
+            similarity=0.92,
+        )
+        self.client.force_authenticate(user=self.voter)
+
+        response = self.client.post(
+            "/api/v1/features/",
+            {
+                "title": "Night mode",
+                "description": "Add a dark interface for the application.",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(response.data["code"], "semantic_duplicate")
+        self.assertEqual(response.data["similar_feature"]["id"], existing_feature.id)
+        self.assertTrue(response.data["can_force"])
+        self.assertEqual(
+            response.data["reason"],
+            "Both requests ask for the same dark theme capability.",
+        )
+        self.assertEqual(Feature.objects.count(), 1)
+        self.assertEqual(FeatureEmbedding.objects.count(), 0)
+
+    @patch("apps.voting.services.semantic_feature_validator.find_duplicate_match")
+    @patch("apps.voting.services.semantic_feature_validator.generate_embedding")
+    def test_create_feature_force_skips_duplicate_check(
+        self,
+        mock_generate_embedding,
+        mock_find_duplicate_match,
+    ):
+        mock_generate_embedding.return_value = EMBEDDING_VECTOR
+        self.client.force_authenticate(user=self.owner)
+
+        response = self.client.post(
+            "/api/v1/features/",
+            {
+                "title": "Dark mode",
+                "description": "Please add dark mode.",
+                "force": True,
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        mock_find_duplicate_match.assert_not_called()
+        self.assertEqual(FeatureEmbedding.objects.count(), 1)
+
+    @patch("apps.voting.services.semantic_feature_validator.generate_embedding")
+    def test_create_feature_returns_503_when_semantic_validation_is_unavailable(
+        self,
+        mock_generate_embedding,
+    ):
+        mock_generate_embedding.side_effect = SemanticValidationUnavailableError(
+            "Could not generate a feature embedding."
+        )
+        self.client.force_authenticate(user=self.owner)
+
+        response = self.client.post(
+            "/api/v1/features/",
+            {"title": "Dark mode", "description": "Please add dark mode."},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_503_SERVICE_UNAVAILABLE)
+        self.assertEqual(
+            response.data["detail"],
+            "Feature creation is temporarily unavailable while semantic validation is unavailable.",
+        )
+        self.assertEqual(Feature.objects.count(), 0)
 
     def test_vote_updates_counter_and_last_voted_at(self):
         feature = Feature.objects.create(

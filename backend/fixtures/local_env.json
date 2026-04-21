@@ -1,0 +1,1368 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "alice.product",
+      "first_name": "Alice",
+      "last_name": "Rivera",
+      "email": "alice.product@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-08T15:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ben.ops",
+      "first_name": "Ben",
+      "last_name": "Turner",
+      "email": "ben.ops@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-10T16:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "carla.design",
+      "first_name": "Carla",
+      "last_name": "Mendez",
+      "email": "carla.design@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-12T17:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "diego.frontend",
+      "first_name": "Diego",
+      "last_name": "Santos",
+      "email": "diego.frontend@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-14T18:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "elena.security",
+      "first_name": "Elena",
+      "last_name": "Brooks",
+      "email": "elena.security@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-16T14:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "felix.data",
+      "first_name": "Felix",
+      "last_name": "Nguyen",
+      "email": "felix.data@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-18T15:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "grace.pm",
+      "first_name": "Grace",
+      "last_name": "Kim",
+      "email": "grace.pm@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-20T16:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "hugo.support",
+      "first_name": "Hugo",
+      "last_name": "Ramirez",
+      "email": "hugo.support@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-22T17:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "iris.qa",
+      "first_name": "Iris",
+      "last_name": "Patel",
+      "email": "iris.qa@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-24T18:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "julian.growth",
+      "first_name": "Julian",
+      "last_name": "Cole",
+      "email": "julian.growth@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-26T14:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kelly.admin",
+      "first_name": "Kelly",
+      "last_name": "Foster",
+      "email": "kelly.admin@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-28T15:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "leo.mobile",
+      "first_name": "Leo",
+      "last_name": "Alvarez",
+      "email": "leo.mobile@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-30T16:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "maria.cx",
+      "first_name": "Maria",
+      "last_name": "Lopez",
+      "email": "maria.cx@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-02-01T17:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "nora.platform",
+      "first_name": "Nora",
+      "last_name": "Bennett",
+      "email": "nora.platform@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-02-03T18:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$nnb4gGsdO6ZguZIX7Fckvp$n0oPgbuZAErzkcWGQYy2xhfrwd2stQP4YZ0vaUNdkT4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "oscar.devops",
+      "first_name": "Oscar",
+      "last_name": "Diaz",
+      "email": "oscar.devops@metacto.local",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-02-05T14:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 1,
+    "fields": {
+      "title": "Saved filter presets",
+      "description": "Allow users to save and quickly re-apply dashboard filter combinations across sessions.",
+      "owner": 5,
+      "created_at": "2026-03-03T12:00:00Z",
+      "updated_at": "2026-03-03T17:00:00Z",
+      "last_voted_at": "2026-03-19T04:13:00Z",
+      "number_of_votes": 9
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 1,
+    "fields": {
+      "feature": 1,
+      "user": 15,
+      "created_at": "2026-03-05T08:34:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 2,
+    "fields": {
+      "feature": 1,
+      "user": 7,
+      "created_at": "2026-03-07T18:38:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 3,
+    "fields": {
+      "feature": 1,
+      "user": 12,
+      "created_at": "2026-03-10T00:03:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 4,
+    "fields": {
+      "feature": 1,
+      "user": 4,
+      "created_at": "2026-03-10T22:38:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 5,
+    "fields": {
+      "feature": 1,
+      "user": 9,
+      "created_at": "2026-03-11T17:27:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 6,
+    "fields": {
+      "feature": 1,
+      "user": 2,
+      "created_at": "2026-03-11T20:37:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 7,
+    "fields": {
+      "feature": 1,
+      "user": 3,
+      "created_at": "2026-03-13T04:11:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 8,
+    "fields": {
+      "feature": 1,
+      "user": 11,
+      "created_at": "2026-03-14T08:48:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 9,
+    "fields": {
+      "feature": 1,
+      "user": 10,
+      "created_at": "2026-03-19T04:13:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 2,
+    "fields": {
+      "title": "Two-factor authentication",
+      "description": "Add TOTP-based 2FA during login for accounts that need stronger protection.",
+      "owner": 8,
+      "created_at": "2026-03-04T15:00:00Z",
+      "updated_at": "2026-03-04T21:00:00Z",
+      "last_voted_at": "2026-03-15T01:49:00Z",
+      "number_of_votes": 8
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 10,
+    "fields": {
+      "feature": 2,
+      "user": 4,
+      "created_at": "2026-03-07T16:05:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 11,
+    "fields": {
+      "feature": 2,
+      "user": 14,
+      "created_at": "2026-03-09T02:52:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 12,
+    "fields": {
+      "feature": 2,
+      "user": 2,
+      "created_at": "2026-03-09T07:12:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 13,
+    "fields": {
+      "feature": 2,
+      "user": 10,
+      "created_at": "2026-03-10T18:04:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 14,
+    "fields": {
+      "feature": 2,
+      "user": 1,
+      "created_at": "2026-03-11T11:31:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 15,
+    "fields": {
+      "feature": 2,
+      "user": 3,
+      "created_at": "2026-03-12T05:25:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 16,
+    "fields": {
+      "feature": 2,
+      "user": 9,
+      "created_at": "2026-03-13T16:13:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 17,
+    "fields": {
+      "feature": 2,
+      "user": 15,
+      "created_at": "2026-03-15T01:49:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 3,
+    "fields": {
+      "title": "Dark mode dashboard",
+      "description": "Provide a polished dark theme for the main feature board and detail views.",
+      "owner": 14,
+      "created_at": "2026-03-05T10:00:00Z",
+      "updated_at": "2026-03-05T17:00:00Z",
+      "last_voted_at": "2026-03-17T18:29:00Z",
+      "number_of_votes": 8
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 18,
+    "fields": {
+      "feature": 3,
+      "user": 3,
+      "created_at": "2026-03-07T01:43:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 19,
+    "fields": {
+      "feature": 3,
+      "user": 2,
+      "created_at": "2026-03-10T05:46:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 20,
+    "fields": {
+      "feature": 3,
+      "user": 15,
+      "created_at": "2026-03-12T03:19:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 21,
+    "fields": {
+      "feature": 3,
+      "user": 1,
+      "created_at": "2026-03-14T12:54:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 22,
+    "fields": {
+      "feature": 3,
+      "user": 5,
+      "created_at": "2026-03-15T14:15:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 23,
+    "fields": {
+      "feature": 3,
+      "user": 4,
+      "created_at": "2026-03-15T18:43:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 24,
+    "fields": {
+      "feature": 3,
+      "user": 6,
+      "created_at": "2026-03-16T22:46:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 25,
+    "fields": {
+      "feature": 3,
+      "user": 13,
+      "created_at": "2026-03-17T18:29:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 4,
+    "fields": {
+      "title": "Comment threads on feature requests",
+      "description": "Let users discuss context, constraints, and use cases directly under each request.",
+      "owner": 11,
+      "created_at": "2026-03-06T13:00:00Z",
+      "updated_at": "2026-03-06T21:00:00Z",
+      "last_voted_at": "2026-03-18T23:30:00Z",
+      "number_of_votes": 7
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 26,
+    "fields": {
+      "feature": 4,
+      "user": 12,
+      "created_at": "2026-03-12T07:13:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 27,
+    "fields": {
+      "feature": 4,
+      "user": 8,
+      "created_at": "2026-03-12T09:04:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 28,
+    "fields": {
+      "feature": 4,
+      "user": 13,
+      "created_at": "2026-03-13T06:30:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 29,
+    "fields": {
+      "feature": 4,
+      "user": 1,
+      "created_at": "2026-03-13T16:36:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 30,
+    "fields": {
+      "feature": 4,
+      "user": 14,
+      "created_at": "2026-03-16T07:43:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 31,
+    "fields": {
+      "feature": 4,
+      "user": 15,
+      "created_at": "2026-03-18T05:23:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 32,
+    "fields": {
+      "feature": 4,
+      "user": 7,
+      "created_at": "2026-03-18T23:30:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 5,
+    "fields": {
+      "title": "Bulk status updates for admins",
+      "description": "Enable admins to move multiple feature requests between states in one action.",
+      "owner": 6,
+      "created_at": "2026-03-07T16:00:00Z",
+      "updated_at": "2026-03-08T01:00:00Z",
+      "last_voted_at": "2026-03-19T17:27:00Z",
+      "number_of_votes": 7
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 33,
+    "fields": {
+      "feature": 5,
+      "user": 7,
+      "created_at": "2026-03-12T03:45:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 34,
+    "fields": {
+      "feature": 5,
+      "user": 12,
+      "created_at": "2026-03-14T23:53:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 35,
+    "fields": {
+      "feature": 5,
+      "user": 14,
+      "created_at": "2026-03-15T06:15:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 36,
+    "fields": {
+      "feature": 5,
+      "user": 10,
+      "created_at": "2026-03-15T07:10:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 37,
+    "fields": {
+      "feature": 5,
+      "user": 15,
+      "created_at": "2026-03-15T21:05:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 38,
+    "fields": {
+      "feature": 5,
+      "user": 4,
+      "created_at": "2026-03-17T01:54:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 39,
+    "fields": {
+      "feature": 5,
+      "user": 9,
+      "created_at": "2026-03-19T17:27:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 6,
+    "fields": {
+      "title": "In-app status notifications",
+      "description": "Notify followers when a feature changes status or receives an official response.",
+      "owner": 7,
+      "created_at": "2026-03-08T11:00:00Z",
+      "updated_at": "2026-03-08T15:00:00Z",
+      "last_voted_at": "2026-03-21T03:46:00Z",
+      "number_of_votes": 6
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 40,
+    "fields": {
+      "feature": 6,
+      "user": 12,
+      "created_at": "2026-03-11T16:03:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 41,
+    "fields": {
+      "feature": 6,
+      "user": 13,
+      "created_at": "2026-03-13T02:23:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 42,
+    "fields": {
+      "feature": 6,
+      "user": 11,
+      "created_at": "2026-03-13T15:06:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 43,
+    "fields": {
+      "feature": 6,
+      "user": 8,
+      "created_at": "2026-03-15T01:45:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 44,
+    "fields": {
+      "feature": 6,
+      "user": 10,
+      "created_at": "2026-03-17T00:29:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 45,
+    "fields": {
+      "feature": 6,
+      "user": 1,
+      "created_at": "2026-03-21T03:46:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 7,
+    "fields": {
+      "title": "Anonymous voting in enterprise spaces",
+      "description": "Allow workspace admins to enable anonymous voting for sensitive internal requests.",
+      "owner": 10,
+      "created_at": "2026-03-09T14:00:00Z",
+      "updated_at": "2026-03-09T19:00:00Z",
+      "last_voted_at": "2026-03-19T20:47:00Z",
+      "number_of_votes": 6
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 46,
+    "fields": {
+      "feature": 7,
+      "user": 13,
+      "created_at": "2026-03-11T21:39:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 47,
+    "fields": {
+      "feature": 7,
+      "user": 11,
+      "created_at": "2026-03-16T06:55:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 48,
+    "fields": {
+      "feature": 7,
+      "user": 14,
+      "created_at": "2026-03-17T08:56:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 49,
+    "fields": {
+      "feature": 7,
+      "user": 7,
+      "created_at": "2026-03-18T20:35:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 50,
+    "fields": {
+      "feature": 7,
+      "user": 9,
+      "created_at": "2026-03-19T06:20:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 51,
+    "fields": {
+      "feature": 7,
+      "user": 8,
+      "created_at": "2026-03-19T20:47:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 8,
+    "fields": {
+      "title": "Duplicate detection preview",
+      "description": "Show likely duplicate feature requests before submission so users can join existing demand.",
+      "owner": 11,
+      "created_at": "2026-03-10T09:00:00Z",
+      "updated_at": "2026-03-10T15:00:00Z",
+      "last_voted_at": "2026-03-21T12:20:00Z",
+      "number_of_votes": 5
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 52,
+    "fields": {
+      "feature": 8,
+      "user": 14,
+      "created_at": "2026-03-14T04:05:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 53,
+    "fields": {
+      "feature": 8,
+      "user": 1,
+      "created_at": "2026-03-15T17:46:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 54,
+    "fields": {
+      "feature": 8,
+      "user": 5,
+      "created_at": "2026-03-17T14:21:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 55,
+    "fields": {
+      "feature": 8,
+      "user": 15,
+      "created_at": "2026-03-18T00:51:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 56,
+    "fields": {
+      "feature": 8,
+      "user": 4,
+      "created_at": "2026-03-21T12:20:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 9,
+    "fields": {
+      "title": "Keyboard shortcuts",
+      "description": "Add keyboard shortcuts for search, navigation, voting, and opening submission forms.",
+      "owner": 3,
+      "created_at": "2026-03-11T12:00:00Z",
+      "updated_at": "2026-03-11T19:00:00Z",
+      "last_voted_at": "2026-03-21T00:56:00Z",
+      "number_of_votes": 5
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 57,
+    "fields": {
+      "feature": 9,
+      "user": 6,
+      "created_at": "2026-03-14T01:13:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 58,
+    "fields": {
+      "feature": 9,
+      "user": 12,
+      "created_at": "2026-03-16T00:55:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 59,
+    "fields": {
+      "feature": 9,
+      "user": 14,
+      "created_at": "2026-03-18T18:30:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 60,
+    "fields": {
+      "feature": 9,
+      "user": 4,
+      "created_at": "2026-03-19T01:57:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 61,
+    "fields": {
+      "feature": 9,
+      "user": 7,
+      "created_at": "2026-03-21T00:56:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 10,
+    "fields": {
+      "title": "Audit log export",
+      "description": "Export administrative actions and moderation history for compliance reviews.",
+      "owner": 8,
+      "created_at": "2026-03-12T15:00:00Z",
+      "updated_at": "2026-03-12T23:00:00Z",
+      "last_voted_at": "2026-03-24T04:54:00Z",
+      "number_of_votes": 5
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 62,
+    "fields": {
+      "feature": 10,
+      "user": 7,
+      "created_at": "2026-03-15T09:08:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 63,
+    "fields": {
+      "feature": 10,
+      "user": 15,
+      "created_at": "2026-03-18T09:00:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 64,
+    "fields": {
+      "feature": 10,
+      "user": 2,
+      "created_at": "2026-03-19T23:22:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 65,
+    "fields": {
+      "feature": 10,
+      "user": 5,
+      "created_at": "2026-03-21T04:13:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 66,
+    "fields": {
+      "feature": 10,
+      "user": 13,
+      "created_at": "2026-03-24T04:54:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 11,
+    "fields": {
+      "title": "Roadmap prioritization board",
+      "description": "Create a drag-and-drop planning board for product teams to prioritize requests internally.",
+      "owner": 9,
+      "created_at": "2026-03-13T10:00:00Z",
+      "updated_at": "2026-03-13T19:00:00Z",
+      "last_voted_at": "2026-03-22T12:29:00Z",
+      "number_of_votes": 4
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 67,
+    "fields": {
+      "feature": 11,
+      "user": 8,
+      "created_at": "2026-03-18T05:33:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 68,
+    "fields": {
+      "feature": 11,
+      "user": 12,
+      "created_at": "2026-03-18T06:15:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 69,
+    "fields": {
+      "feature": 11,
+      "user": 3,
+      "created_at": "2026-03-22T02:33:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 70,
+    "fields": {
+      "feature": 11,
+      "user": 7,
+      "created_at": "2026-03-22T12:29:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 12,
+    "fields": {
+      "title": "Abuse and rate-limit protection",
+      "description": "Detect suspicious voting bursts and throttle abusive request patterns automatically.",
+      "owner": 12,
+      "created_at": "2026-03-14T13:00:00Z",
+      "updated_at": "2026-03-14T17:00:00Z",
+      "last_voted_at": "2026-03-22T21:39:00Z",
+      "number_of_votes": 4
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 71,
+    "fields": {
+      "feature": 12,
+      "user": 1,
+      "created_at": "2026-03-15T14:40:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 72,
+    "fields": {
+      "feature": 12,
+      "user": 9,
+      "created_at": "2026-03-17T19:58:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 73,
+    "fields": {
+      "feature": 12,
+      "user": 2,
+      "created_at": "2026-03-20T07:09:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 74,
+    "fields": {
+      "feature": 12,
+      "user": 6,
+      "created_at": "2026-03-22T21:39:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 13,
+    "fields": {
+      "title": "Public changelog page",
+      "description": "Publish shipped features and product updates in a public changelog tied to requests.",
+      "owner": 7,
+      "created_at": "2026-03-15T16:00:00Z",
+      "updated_at": "2026-03-15T21:00:00Z",
+      "last_voted_at": "2026-03-25T00:58:00Z",
+      "number_of_votes": 4
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 75,
+    "fields": {
+      "feature": 13,
+      "user": 5,
+      "created_at": "2026-03-18T05:49:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 76,
+    "fields": {
+      "feature": 13,
+      "user": 3,
+      "created_at": "2026-03-20T18:06:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 77,
+    "fields": {
+      "feature": 13,
+      "user": 12,
+      "created_at": "2026-03-22T11:33:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 78,
+    "fields": {
+      "feature": 13,
+      "user": 11,
+      "created_at": "2026-03-25T00:58:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 14,
+    "fields": {
+      "title": "CSV export for analytics",
+      "description": "Export feature ranking and voting analytics for offline reporting.",
+      "owner": 10,
+      "created_at": "2026-03-16T11:00:00Z",
+      "updated_at": "2026-03-16T17:00:00Z",
+      "last_voted_at": "2026-03-23T12:16:00Z",
+      "number_of_votes": 3
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 79,
+    "fields": {
+      "feature": 14,
+      "user": 11,
+      "created_at": "2026-03-20T20:37:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 80,
+    "fields": {
+      "feature": 14,
+      "user": 12,
+      "created_at": "2026-03-22T06:37:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 81,
+    "fields": {
+      "feature": 14,
+      "user": 6,
+      "created_at": "2026-03-23T12:16:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 15,
+    "fields": {
+      "title": "Google and Microsoft SSO",
+      "description": "Support SSO providers so teams can onboard without creating separate passwords.",
+      "owner": 1,
+      "created_at": "2026-03-17T14:00:00Z",
+      "updated_at": "2026-03-17T21:00:00Z",
+      "last_voted_at": "2026-03-25T00:17:00Z",
+      "number_of_votes": 3
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 82,
+    "fields": {
+      "feature": 15,
+      "user": 14,
+      "created_at": "2026-03-23T02:01:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 83,
+    "fields": {
+      "feature": 15,
+      "user": 8,
+      "created_at": "2026-03-23T10:34:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 84,
+    "fields": {
+      "feature": 15,
+      "user": 3,
+      "created_at": "2026-03-25T00:17:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 16,
+    "fields": {
+      "title": "Accessibility contrast checker",
+      "description": "Warn when UI themes or badges do not meet accessibility contrast ratios.",
+      "owner": 12,
+      "created_at": "2026-03-18T09:00:00Z",
+      "updated_at": "2026-03-18T17:00:00Z",
+      "last_voted_at": "2026-03-25T12:26:00Z",
+      "number_of_votes": 2
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 85,
+    "fields": {
+      "feature": 16,
+      "user": 9,
+      "created_at": "2026-03-20T22:30:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 86,
+    "fields": {
+      "feature": 16,
+      "user": 6,
+      "created_at": "2026-03-25T12:26:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 17,
+    "fields": {
+      "title": "Mentions in feature discussions",
+      "description": "Allow users to mention teammates in feature comments and notifications.",
+      "owner": 3,
+      "created_at": "2026-03-19T12:00:00Z",
+      "updated_at": "2026-03-19T21:00:00Z",
+      "last_voted_at": "2026-03-27T06:32:00Z",
+      "number_of_votes": 2
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 87,
+    "fields": {
+      "feature": 17,
+      "user": 13,
+      "created_at": "2026-03-25T14:48:00Z"
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 88,
+    "fields": {
+      "feature": 17,
+      "user": 8,
+      "created_at": "2026-03-27T06:32:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 18,
+    "fields": {
+      "title": "Mobile board improvements",
+      "description": "Improve the dashboard layout and interactions for phones and small tablets.",
+      "owner": 12,
+      "created_at": "2026-03-20T15:00:00Z",
+      "updated_at": "2026-03-20T19:00:00Z",
+      "last_voted_at": "2026-03-25T11:28:00Z",
+      "number_of_votes": 1
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 89,
+    "fields": {
+      "feature": 18,
+      "user": 10,
+      "created_at": "2026-03-25T11:28:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 19,
+    "fields": {
+      "title": "Moderation queue for flagged requests",
+      "description": "Provide a review queue for spam, abuse, and policy-violating submissions.",
+      "owner": 11,
+      "created_at": "2026-03-21T10:00:00Z",
+      "updated_at": "2026-03-21T15:00:00Z",
+      "last_voted_at": "2026-03-25T02:27:00Z",
+      "number_of_votes": 1
+    }
+  },
+  {
+    "model": "voting.vote",
+    "pk": 90,
+    "fields": {
+      "feature": 19,
+      "user": 6,
+      "created_at": "2026-03-25T02:27:00Z"
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 20,
+    "fields": {
+      "title": "Vote history timeline",
+      "description": "Show a timeline of vote activity and status changes for each feature request.",
+      "owner": 11,
+      "created_at": "2026-03-22T13:00:00Z",
+      "updated_at": "2026-03-22T19:00:00Z",
+      "last_voted_at": null,
+      "number_of_votes": 0
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 21,
+    "fields": {
+      "title": "Custom tags and categories",
+      "description": "Let admins define tags and categories to organize feature requests by product area.",
+      "owner": 2,
+      "created_at": "2026-03-23T16:00:00Z",
+      "updated_at": "2026-03-23T23:00:00Z",
+      "last_voted_at": null,
+      "number_of_votes": 0
+    }
+  },
+  {
+    "model": "voting.feature",
+    "pk": 22,
+    "fields": {
+      "title": "Admin merge for duplicates",
+      "description": "Allow admins to merge overlapping requests while preserving votes and history.",
+      "owner": 10,
+      "created_at": "2026-03-24T11:00:00Z",
+      "updated_at": "2026-03-24T19:00:00Z",
+      "last_voted_at": null,
+      "number_of_votes": 0
+    }
+  }
+]

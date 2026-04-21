@@ -22,6 +22,10 @@ from apps.voting.services import (
     unvote_feature,
     vote_for_feature,
 )
+from apps.voting.semantic import (
+    SemanticDuplicateFeatureError,
+    SemanticValidationUnavailableError,
+)
 
 
 class FeatureViewSet(
@@ -67,7 +71,42 @@ class FeatureViewSet(
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        feature = create_feature(owner=request.user, **serializer.validated_data)
+        try:
+            feature = create_feature(owner=request.user, **serializer.validated_data)
+        except SemanticDuplicateFeatureError as exc:
+            similar_feature = get_feature_for_user(
+                user=request.user,
+                feature_id=exc.feature_id,
+            )
+            similar_feature_serializer = FeatureSerializer(
+                similar_feature,
+                context=self.get_serializer_context(),
+            )
+            return Response(
+                {
+                    "code": "semantic_duplicate",
+                    "detail": "A similar feature already exists.",
+                    "reason": exc.reason,
+                    "confidence": exc.confidence,
+                    "similarity": exc.similarity,
+                    "can_force": True,
+                    "similar_feature": similar_feature_serializer.data,
+                },
+                status=status.HTTP_409_CONFLICT,
+            )
+        except SemanticValidationUnavailableError:
+            import traceback
+            traceback.print_exc()
+            return Response(
+                {
+                    "detail": (
+                        "Feature creation is temporarily unavailable while semantic "
+                        "validation is unavailable."
+                    )
+                },
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
         feature = get_feature_for_user(user=request.user, feature_id=feature.id)
 
         response_serializer = FeatureSerializer(

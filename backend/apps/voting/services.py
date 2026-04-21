@@ -9,7 +9,13 @@ from apps.voting.domain import (
     VoteNotFoundError,
     ensure_user_can_vote_for_feature,
 )
-from apps.voting.models import Feature, Vote
+from apps.voting.models import Feature, FeatureEmbedding, Vote
+from apps.voting.semantic import (
+    SemanticDuplicateFeatureError,
+    SemanticValidationUnavailableError,
+    build_feature_canonical_text,
+    semantic_feature_validator,
+)
 
 
 SORT_OPTIONS = {
@@ -64,13 +70,41 @@ def list_features(*, user, query="", sort="number_of_votes", mine=False, voted=F
     return queryset.order_by(*SORT_OPTIONS[sort])
 
 
-def create_feature(*, owner, title, description):
-    """Create a feature owned by the authenticated user."""
-    return Feature.objects.create(
-        owner=owner,
-        title=title,
-        description=description,
-    )
+def create_feature(*, owner, title, description, force=False):
+    """Create a feature owned by the authenticated user after semantic validation."""
+    canonical_text = build_feature_canonical_text(title=title, description=description)
+
+    try:
+        embedding = semantic_feature_validator.generate_embedding(canonical_text)
+    except SemanticValidationUnavailableError:
+        raise
+
+    if not force:
+        duplicate_match = semantic_feature_validator.find_duplicate_match(
+            canonical_text=canonical_text,
+            embedding=embedding,
+        )
+        if duplicate_match is not None:
+            raise SemanticDuplicateFeatureError(
+                confidence=duplicate_match.confidence,
+                feature_id=duplicate_match.feature_id,
+                reason=duplicate_match.reason,
+                similarity=duplicate_match.similarity,
+            )
+
+    with transaction.atomic():
+        feature = Feature.objects.create(
+            owner=owner,
+            title=title,
+            description=description,
+        )
+        FeatureEmbedding.objects.create(
+            feature=feature,
+            canonical_text=canonical_text,
+            embedding=embedding,
+        )
+
+    return feature
 
 
 def get_feature_for_user(*, user, feature_id):

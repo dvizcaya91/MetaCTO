@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from pgvector.django import HnswIndex, VectorField
 
 from apps.voting.domain import SelfVoteNotAllowedError, ensure_user_can_vote_for_feature
 
@@ -22,6 +23,34 @@ class Feature(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class FeatureEmbedding(models.Model):
+    """Canonical text and vector representation for semantic duplicate checks."""
+
+    feature = models.OneToOneField(
+        Feature,
+        on_delete=models.CASCADE,
+        related_name="semantic_embedding",
+    )
+    canonical_text = models.TextField()
+    embedding = VectorField(dimensions=settings.FEATURE_EMBEDDING_DIMENSIONS)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        indexes = [
+            HnswIndex(
+                name="feature_embedding_cosine_hnsw",
+                fields=["embedding"],
+                m=16,
+                ef_construction=64,
+                opclasses=["vector_cosine_ops"],
+            ),
+        ]
+
+    def __str__(self):
+        return "Embedding for feature #{feature_id}".format(feature_id=self.feature_id)
 
 
 class Vote(models.Model):

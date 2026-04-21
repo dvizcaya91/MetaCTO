@@ -48,9 +48,11 @@ class FeatureSerializer(serializers.ModelSerializer):
 class FeatureCreateSerializer(serializers.ModelSerializer):
     """Validate feature creation payloads."""
 
+    force = serializers.BooleanField(required=False, default=False, write_only=True)
+
     class Meta:
         model = Feature
-        fields = ("title", "description")
+        fields = ("title", "description", "force")
 
 
 class FeatureListQuerySerializer(serializers.Serializer):
