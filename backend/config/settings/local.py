@@ -15,3 +15,5 @@ ALLOWED_HOSTS = [
     ).split(",")
     if host.strip()
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
