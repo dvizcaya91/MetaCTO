@@ -13,41 +13,101 @@ const platformEn = {
     loading: 'Working...',
   },
   dashboard: {
+    description:
+      'Browse feature requests, sort demand signals, search for exact titles or descriptions, and vote on the ideas that deserve priority.',
+    eyebrow: 'Voting dashboard',
+    guestPromptDescription:
+      'Guests can browse all features. Log in to vote, unvote, and use the personalized tabs for your own and voted features.',
+    guestPromptLogin: 'Log in',
+    guestPromptSignup: 'Create account',
+    guestPromptTitle: 'Unlock voting and personalized filters',
+    searchModeLabel: 'Search mode',
+    searchModeValue:
+      'Search checks for exact matches on feature title or description and keeps sorting and pagination in sync.',
+    titleAuthenticated: 'Welcome back, {{username}}. Here is what the roadmap needs next.',
+    titleGuest: 'See which feature ideas are climbing to the top.',
+  },
+  features: {
     cards: {
-      accessDescription:
-        'The access token stays in React context only and is injected into Axios at runtime.',
-      accessMissing: 'Not loaded',
-      accessPresent: 'Loaded in memory',
-      accessTitle: 'Access token',
-      refreshDescription:
-        'The refresh token is persisted locally so the app can attempt session restoration after a reload.',
-      refreshMissing: 'Not available',
-      refreshPresent: 'Stored locally',
-      refreshTitle: 'Refresh token',
-      sessionActive: 'Active',
-      sessionDescription:
-        'This dashboard is public, but the session panel reflects whether authentication is currently active.',
-      sessionInactive: 'Guest',
-      sessionTitle: 'Session status',
+      createdAt: 'Created {{value}}',
+      lastVotedAt: 'Last voted {{value}}',
+      loginToVote: 'Log in to vote',
+      neverVoted: 'No votes yet',
+      owned: 'My feature',
+      ownerVoteLocked: 'Your feature',
+      unvote: 'Remove vote',
+      unvoting: 'Removing vote...',
+      vote: 'Vote',
+      voteCount: '{{count}} votes',
+      voted: 'Voted',
+      voting: 'Voting...',
+    },
+    controls: {
+      refresh: 'Retry',
+      searchLabel: 'Exact search',
+      searchPlaceholder: 'Match the full title or description',
+      sortLabel: 'Sort features',
+    },
+    create: {
+      cancel: 'Cancel',
+      close: 'Close modal',
+      description:
+        'Describe the improvement clearly so other users can understand it and decide whether to vote for it.',
+      descriptionLabel: 'Description',
+      descriptionPlaceholder:
+        'Explain the feature request and the problem it solves',
+      errors: {
+        network:
+          'The feature could not be created right now. Check the connection and try again.',
+        unauthorized: 'You need to log in again before creating a feature.',
+        unexpected: 'We could not create the feature. Try again in a moment.',
+        validation: 'Please review the fields and try again.',
+      },
+      open: 'Request new feature',
+      submit: 'Create feature',
+      submitting: 'Creating feature...',
+      title: 'Request a new feature',
+      titleLabel: 'Title',
+      titlePlaceholder: 'Summarize the idea in a short title',
+      validation: {
+        descriptionMin: 'Use at least 10 characters in the description.',
+        descriptionRequired: 'Description is required.',
+        titleMin: 'Use at least 3 characters in the title.',
+        titleRequired: 'Title is required.',
+      },
     },
     description:
-      'A public dashboard that surfaces the current authentication state, token lifecycle, and next actions.',
-    eyebrow: 'Dashboard overview',
-    routeVisibility: 'Route access',
-    routeVisibilityValue: 'Public page',
-    summary: {
-      authenticatedDescription:
-        'The access token is active in memory and the refresh token remains available for the next reload attempt.',
-      authenticatedLabel: 'Session live',
-      authenticatedTitle: 'Authentication is active',
-      guestDescription:
-        'You can browse this page without a session, but login or signup is required to obtain tokens.',
-      guestLabel: 'Guest mode',
-      guestTitle: 'No active authentication',
-      loginAction: 'Go to login',
-      signupAction: 'Create account',
+      'Use exact search, personalized tabs, and vote controls to focus on the most meaningful product opportunities.',
+    empty: {
+      description:
+        'Try a different tab, adjust the sort order, or search for a different exact title or description.',
+      title: 'No features match these filters',
     },
-    title: 'Track the session state from a single control surface.',
+    errors: {
+      network:
+        'The voting service is unavailable right now. Check the connection and try again.',
+      notFound: 'This feature is no longer available.',
+      title: 'We could not load the feature list',
+      unexpected: 'Something went wrong while updating the vote. Try again.',
+    },
+    eyebrow: 'Feature inventory',
+    pagination: {
+      next: 'Next',
+      page: 'Page {{current}} of {{total}}',
+      previous: 'Previous',
+    },
+    sort: {
+      lastCreated: 'Last created',
+      lastVoted: 'Last voted',
+      mostVotes: 'Most votes',
+    },
+    tabs: {
+      all: 'All features',
+      mine: 'My features',
+      voted: 'Voted by me',
+    },
+    title: 'Feature requests ranked by community demand',
+    totalLabel: 'Matching features',
   },
   language: {
     english: 'English',
