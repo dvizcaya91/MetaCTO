@@ -10,7 +10,8 @@ import { useAuth } from '@/hooks/auth/useAuth'
 export const AppShellTemplate = () => {
   const { t } = useTranslation('platform')
   const navigate = useNavigate()
-  const { isAuthenticated, isSessionBootstrapping, signOut } = useAuth()
+  const { currentUser, isAuthenticated, isSessionBootstrapping, signOut } =
+    useAuth()
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -23,12 +24,18 @@ export const AppShellTemplate = () => {
             <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
               <NavigationMenu />
               <div className="flex items-center gap-3 rounded-full border border-border/80 bg-background/55 px-4 py-3 text-sm">
-                <span className="inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(0,117,255,0.75)]" />
+                <span
+                  className={
+                    isAuthenticated
+                      ? 'inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(74,222,128,0.85)]'
+                      : 'inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(0,117,255,0.75)]'
+                  }
+                />
                 <span className="text-muted-foreground">
                   {isSessionBootstrapping
                     ? t('session.restoring')
                     : isAuthenticated
-                      ? t('session.authenticated')
+                      ? currentUser?.username
                       : t('session.guest')}
                 </span>
               </div>

@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { AuthContext } from '@/app/AuthContext'
+import type { ICurrentUser } from '@/interfaces/auth/ICurrentUser'
 import type { ILoginRequest } from '@/interfaces/auth/ILoginRequest'
 import type { ISignupRequest } from '@/interfaces/auth/ISignupRequest'
+import { getCurrentUser } from '@/services/auth/getCurrentUser'
 import { refreshAccessToken } from '@/services/auth/refreshAccessToken'
 import { clearRefreshToken, readRefreshToken, writeRefreshToken } from '@/services/auth/tokenStorage'
 import { login } from '@/services/auth/login'
@@ -25,12 +27,40 @@ const redirectToLogin = () => {
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [accessToken, setAccessToken] = useState<string | null>(null)
+  const [currentUser, setCurrentUser] = useState<ICurrentUser | null>(null)
   const [hasRefreshToken, setHasRefreshToken] = useState(false)
   const [isSessionBootstrapping, setIsSessionBootstrapping] = useState(true)
 
   useEffect(() => {
     setApiPrivateAccessToken(accessToken)
   }, [accessToken])
+
+  const clearSession = useCallback(() => {
+    clearRefreshToken()
+    setApiPrivateAccessToken(null)
+    setAccessToken(null)
+    setCurrentUser(null)
+    setHasRefreshToken(false)
+  }, [])
+
+  const establishSession = useCallback(async (
+    nextAccessToken: string,
+    nextRefreshToken: string,
+  ) => {
+    setApiPrivateAccessToken(nextAccessToken)
+
+    try {
+      const user = await getCurrentUser()
+
+      writeRefreshToken(nextRefreshToken)
+      setAccessToken(nextAccessToken)
+      setCurrentUser(user)
+      setHasRefreshToken(true)
+    } catch (error) {
+      clearSession()
+      throw error
+    }
+  }, [clearSession])
 
   useEffect(() => {
     let isCancelled = false
@@ -40,6 +70,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
       if (!refreshToken) {
         setHasRefreshToken(false)
+        setCurrentUser(null)
         setIsSessionBootstrapping(false)
         return
       }
@@ -55,19 +86,16 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
           return
         }
 
-        setAccessToken(refreshedSession.access)
-
-        if (refreshedSession.refresh) {
-          writeRefreshToken(refreshedSession.refresh)
-        }
+        await establishSession(
+          refreshedSession.access,
+          refreshedSession.refresh ?? refreshToken,
+        )
       } catch {
         if (isCancelled) {
           return
         }
 
-        clearRefreshToken()
-        setHasRefreshToken(false)
-        setAccessToken(null)
+        clearSession()
         redirectToLogin()
       } finally {
         if (!isCancelled) {
@@ -81,38 +109,31 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     return () => {
       isCancelled = true
     }
-  }, [])
-
-  const persistSession = (nextAccessToken: string, nextRefreshToken: string) => {
-    setAccessToken(nextAccessToken)
-    setHasRefreshToken(true)
-    writeRefreshToken(nextRefreshToken)
-  }
+  }, [clearSession, establishSession])
 
   const signIn = async (payload: ILoginRequest) => {
     const tokens = await login(payload)
 
-    persistSession(tokens.access, tokens.refresh)
+    await establishSession(tokens.access, tokens.refresh)
   }
 
   const signUp = async (payload: ISignupRequest) => {
     const tokens = await signup(payload)
 
-    persistSession(tokens.access, tokens.refresh)
+    await establishSession(tokens.access, tokens.refresh)
   }
 
   const signOut = () => {
-    clearRefreshToken()
-    setAccessToken(null)
-    setHasRefreshToken(false)
+    clearSession()
   }
 
   return (
     <AuthContext.Provider
       value={{
         accessToken,
+        currentUser,
         hasRefreshToken,
-        isAuthenticated: Boolean(accessToken),
+        isAuthenticated: Boolean(accessToken && currentUser),
         isSessionBootstrapping,
         signIn,
         signOut,
