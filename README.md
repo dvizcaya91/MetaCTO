@@ -36,6 +36,57 @@ The system will be composed of:
 
 The frontend will communicate with the backend over HTTP.
 
+## Tech Stack
+
+- Backend: Django 4.2, Django REST Framework, Simple JWT, django-cors-headers
+- Database: PostgreSQL with `pgvector` for embedding storage and similarity search
+- Semantic validation: OpenAI embeddings plus `llama-index` integration for duplicate detection
+- Frontend: React 19, TypeScript, Vite
+- UI and state: Tailwind CSS, Radix UI, Zustand, SWR, React Hook Form, `use-debounce`
+- API client: Axios
+
 ## Data Modeling
 
-The data modeling layer will be defined in a later step. Until then, this document serves as the high-level product and architecture definition for the system.
+The application data model centers on four core entities:
+
+- `User`: application user record, built on Django's custom `AbstractUser`
+- `Feature`: a feature request submitted by a user
+- `Vote`: a user's vote on a feature
+- `FeatureEmbedding`: canonical text and vector data used for semantic duplicate detection
+
+### `User`
+
+- Extends Django's built-in user model through a custom auth model
+- Owns submitted feature requests through `Feature.owner`
+- Can vote on features through `Vote.user`
+
+### `Feature`
+
+- Stores the request `title` and `description`
+- Tracks the submitting `owner`
+- Records timestamps for creation and updates
+- Maintains vote counters and activity metadata through `number_of_votes` and `last_voted_at`
+- Serves as the primary object displayed in lists, search results, and ranking views
+
+### `Vote`
+
+- Links exactly one `User` to exactly one `Feature`
+- Uses a uniqueness constraint on `feature` and `user` to prevent duplicate votes
+- Rejects self-votes through domain validation
+- Supports vote counting and ranking updates on the related `Feature`
+
+### `FeatureEmbedding`
+
+- Stores a one-to-one embedding record for a `Feature`
+- Keeps the canonical text used to generate the embedding
+- Persists the embedding vector in PostgreSQL via `pgvector`
+- Supports semantic duplicate checks before feature creation
+
+### Relationship Summary
+
+- One `User` can own many `Feature` records
+- One `User` can cast many `Vote` records, but only one vote per feature
+- One `Feature` can have many `Vote` records
+- One `Feature` can have at most one `FeatureEmbedding` record
+
+The data model is intentionally narrow so the product can keep the request, vote, and duplicate-detection flows explicit and easy to reason about.
