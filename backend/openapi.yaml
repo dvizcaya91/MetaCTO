@@ -214,6 +214,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feature"
+        "409":
+          description: Semantic duplicate detected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SemanticDuplicateFeature"
         "400":
           description: Validation error
           content:
@@ -222,6 +228,12 @@ paths:
                 $ref: "#/components/schemas/ValidationError"
         "401":
           description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetail"
+        "503":
+          description: Semantic validation unavailable
           content:
             application/json:
               schema:
@@ -408,6 +420,10 @@ components:
           maxLength: 255
         description:
           type: string
+        force:
+          type: boolean
+          default: false
+          description: Skip semantic duplicate validation for this create request.
       additionalProperties: false
 
     Feature:
@@ -472,6 +488,41 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Feature"
+      additionalProperties: false
+
+    SemanticDuplicateFeature:
+      type: object
+      required:
+        - code
+        - detail
+        - reason
+        - confidence
+        - similarity
+        - can_force
+        - similar_feature
+      properties:
+        code:
+          type: string
+          enum:
+            - semantic_duplicate
+        detail:
+          type: string
+        reason:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        similarity:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        can_force:
+          type: boolean
+        similar_feature:
+          $ref: "#/components/schemas/Feature"
       additionalProperties: false
 
     ErrorDetail:
